@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini eCommerce</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-dark bg-dark mb-4">
+    <div class="container">
+      <span class="navbar-brand">🛒 Mini eCommerce</span>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- ALERTS -->
+    <div id="alertas"></div>
+
+    <div class="row">
+
+      <!-- USUARIOS -->
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-header">Usuarios</div>
+          <div class="card-body">
+            <input id="userName" class="form-control mb-2" placeholder="Nombre">
+            <input id="userEmail" class="form-control mb-2" placeholder="Email">
+            <button class="btn btn-primary w-100" onclick="crearUsuario()">Crear usuario</button>
+
+            <div class="accordion mt-3" id="accUsuarios">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="accUsuariosHead">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accUsuariosBody" aria-expanded="false" aria-controls="accUsuariosBody">
+                    Registros de usuarios
+                  </button>
+                </h2>
+                <div id="accUsuariosBody" class="accordion-collapse collapse" aria-labelledby="accUsuariosHead" data-bs-parent="#accUsuarios">
+                  <div class="accordion-body p-0">
+                    <table class="table table-striped mb-0">
+                      <thead>
+                        <tr>
+                          <th>ID</th><th>Nombre</th><th>Email</th><th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tablaUsuarios"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORÍAS -->
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-header">Categorías</div>
+          <div class="card-body">
+            <input id="catName" class="form-control mb-2" placeholder="Nombre categoría">
+            <button class="btn btn-secondary w-100" onclick="crearCategoria()">Crear categoría</button>
+
+            <div class="accordion mt-3" id="accCategorias">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="accCategoriasHead">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accCategoriasBody" aria-expanded="false" aria-controls="accCategoriasBody">
+                    Registros de categorías
+                  </button>
+                </h2>
+                <div id="accCategoriasBody" class="accordion-collapse collapse" aria-labelledby="accCategoriasHead" data-bs-parent="#accCategorias">
+                  <div class="accordion-body p-0">
+                    <table class="table table-striped mb-0">
+                      <thead>
+                        <tr>
+                          <th>ID</th><th>Nombre</th><th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tablaCategorias"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTOS -->
+      <div class="col-md-12">
+        <div class="card mb-4">
+          <div class="card-header">Productos</div>
+          <div class="card-body row g-2">
+            <div class="col-md-4">
+              <input id="prodName" class="form-control" placeholder="Nombre">
+            </div>
+            <div class="col-md-3">
+              <input id="prodPrice" class="form-control" placeholder="Precio">
+            </div>
+            <div class="col-md-3">
+              <select id="prodCat" class="form-select">
+                <option value="">Seleccione categoría</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-success w-100" onclick="crearProducto()">Crear</button>
+            </div>
+
+            <div class="col-12">
+              <div class="accordion mt-3" id="accProductos">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="accProductosHead">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accProductosBody" aria-expanded="false" aria-controls="accProductosBody">
+                      Registros de productos
+                    </button>
+                  </h2>
+                  <div id="accProductosBody" class="accordion-collapse collapse" aria-labelledby="accProductosHead" data-bs-parent="#accProductos">
+                    <div class="accordion-body p-0">
+                      <table class="table table-striped mb-0">
+                        <thead>
+                          <tr>
+                            <th>ID</th><th>Nombre</th><th>Precio</th><th>Categoría</th><th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tablaProductos"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PEDIDOS -->
+      <div class="col-md-12">
+        <div class="card mb-4">
+          <div class="card-header">Pedidos</div>
+          <div class="card-body">
+            <div class="row g-2">
+              <div class="col-md-4">
+                <select id="pedidoUser" class="form-select">
+                  <option value="">Seleccione usuario</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <input id="pedidoFecha" type="date" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <button class="btn btn-warning w-100" onclick="crearPedidoConDetalles()">Crear pedido</button>
+              </div>
+            </div>
+
+            <hr class="my-3">
+
+            <div class="row g-2 align-items-end">
+              <div class="col-md-6">
+                <label class="form-label mb-1">Producto</label>
+                <select id="pedidoProducto" class="form-select">
+                  <option value="">Seleccione producto</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label mb-1">Cantidad</label>
+                <input id="pedidoCantidad" type="number" min="1" class="form-control" value="1">
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-dark w-100" onclick="agregarProductoPedido()">Añadir producto</button>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="table table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th><th></th>
+                  </tr>
+                </thead>
+                <tbody id="tablaDetallePedido"></tbody>
+              </table>
+            </div>
+
+            <div class="d-flex justify-content-end mt-3">
+              <div class="fw-bold">Total: <span id="totalPedido">0</span></div>
+            </div>
+
+            <div class="accordion mt-3" id="accPedidos">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="accPedidosHead">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accPedidosBody" aria-expanded="false" aria-controls="accPedidosBody">
+                    Registros de pedidos
+                  </button>
+                </h2>
+                <div id="accPedidosBody" class="accordion-collapse collapse" aria-labelledby="accPedidosHead" data-bs-parent="#accPedidos">
+                  <div class="accordion-body p-0">
+                    <table class="table table-striped mb-0">
+                      <thead>
+                        <tr>
+                          <th>ID</th><th>Usuario</th><th>Fecha</th><th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tablaPedidos"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DETALLE PEDIDO -->
+
+      <!-- VALORACIONES -->
+      <div class="col-md-12">
+        <div class="card mb-4">
+          <div class="card-header">Valoraciones</div>
+          <div class="card-body row g-2">
+            <div class="col-md-2">
+              <select id="valUser" class="form-select">
+                <option value="">Usuario</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="valProd" class="form-select">
+                <option value="">Producto</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <input id="valScore" type="hidden" value="0">
+              <div class="rating" aria-label="Puntuación">
+                <button type="button" class="rating-star" data-value="1" aria-label="1 estrella">★</button>
+                <button type="button" class="rating-star" data-value="2" aria-label="2 estrellas">★</button>
+                <button type="button" class="rating-star" data-value="3" aria-label="3 estrellas">★</button>
+                <button type="button" class="rating-star" data-value="4" aria-label="4 estrellas">★</button>
+                <button type="button" class="rating-star" data-value="5" aria-label="5 estrellas">★</button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <input id="valComment" class="form-control" placeholder="Comentario">
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-info w-100" onclick="valorar()">Valorar</button>
+            </div>
+
+            <div class="col-12">
+              <div class="accordion mt-3" id="accValoraciones">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="accValoracionesHead">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accValoracionesBody" aria-expanded="false" aria-controls="accValoracionesBody">
+                      Registros de valoraciones
+                    </button>
+                  </h2>
+                  <div id="accValoracionesBody" class="accordion-collapse collapse" aria-labelledby="accValoracionesHead" data-bs-parent="#accValoraciones">
+                    <div class="accordion-body p-0">
+                      <table class="table table-striped mb-0">
+                        <thead>
+                          <tr>
+                            <th>ID</th><th>Usuario</th><th>Producto</th><th>Puntuación</th><th>Comentario</th><th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tablaValoraciones"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

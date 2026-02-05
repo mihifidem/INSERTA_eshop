@@ -1,0 +1,52 @@
+body {
+  background-color: #f2f4f7;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.card-header {
+  background-color: #212529;
+  color: white;
+  font-weight: bold;
+}
+
+button {
+  font-weight: 500;
+}
+
+.table th {
+  background-color: #e9ecef;
+}
+
+#alertas .alert {
+  margin-bottom: 20px;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  height: 38px;
+}
+
+.rating-star {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  color: #ced4da;
+  cursor: pointer;
+  padding: 0;
+}
+
+.rating-star.active,
+.rating-star:hover {
+  color: #ffc107;
+}
